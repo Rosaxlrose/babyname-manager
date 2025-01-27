@@ -143,11 +143,10 @@ const NameManager = () => {
       name.tags.some((tag) => tag.toLowerCase().includes(term))
     );
   });
-
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div className="ml-64 p-6 bg-gray-100 h-screen overflow-hidden font-[Prompt]">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-bold">จัดการชื่อ</h2>
+        <h2 className="text-2xl font-bold text-gray-800">จัดการชื่อ</h2>
         <button
           onClick={() => openForm('add')}
           className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
@@ -168,41 +167,43 @@ const NameManager = () => {
       </div>
 
       {/* Table Section */}
-      <table className="w-full border-collapse border border-gray-300 rounded-md overflow-hidden">
-        <thead>
-          <tr className="bg-purple-500 text-white">
-            <th className="border border-purple-300 p-2">ชื่อ</th>
-            <th className="border border-purple-300 p-2">ความหมาย</th>
-            <th className="border border-purple-300 p-2">แท็ก</th>
-            <th className="border border-purple-300 p-2">เพศ</th>
-            <th className="border border-purple-300 p-2">การจัดการ</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredNames.map((name) => (
-            <tr key={name.id} className="hover:bg-gray-100">
-              <td className="border border-gray-300 p-2">{name.name}</td>
-              <td className="border border-gray-300 p-2">{name.meaning}</td>
-              <td className="border border-gray-300 p-2">{name.tags.join(', ')}</td>
-              <td className="border border-gray-300 p-2">{name.gender}</td>
-              <td className="border border-gray-300 p-2 space-x-2">
-                <button
-                  onClick={() => openForm('edit', name)}
-                  className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600"
-                >
-                  แก้ไข
-                </button>
-                <button
-                  onClick={() => handleDelete(name.id)}
-                  className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
-                >
-                  ลบ
-                </button>
-              </td>
+      <div className="overflow-y-auto h-[calc(100vh-200px)] border border-gray-300 rounded-md shadow-sm bg-white">
+        <table className="w-full border-collapse border border-gray-300">
+          <thead>
+            <tr className="bg-purple-500 text-white">
+              <th className="bg-gray-900 p-2">ชื่อ</th>
+              <th className="bg-gray-900 p-2">ความหมาย</th>
+              <th className="bg-gray-900 p-2">แท็ก</th>
+              <th className="bg-gray-900 p-2">เพศ</th>
+              <th className="bg-gray-900 p-2">การจัดการ</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {filteredNames.map((name) => (
+              <tr key={name.id} className="hover:bg-gray-100">
+                <td className="border border-gray-300 p-2">{name.name}</td>
+                <td className="border border-gray-300 p-2">{name.meaning}</td>
+                <td className="border border-gray-300 p-2">{name.tags.join(', ')}</td>
+                <td className="border border-gray-300 p-2">{name.gender}</td>
+                <td className="border border-gray-300 p-2 space-x-2">
+                  <button
+                    onClick={() => openForm('edit', name)}
+                    className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600"
+                  >
+                    แก้ไข
+                  </button>
+                  <button
+                    onClick={() => handleDelete(name.id)}
+                    className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
+                  >
+                    ลบ
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
